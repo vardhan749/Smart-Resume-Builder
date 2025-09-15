@@ -1,0 +1,19 @@
+{
+  "name": "smart-resume-builder",
+  "version": "1.0.0",
+  "description": "A modern web application that helps create professional resumes with AI-powered suggestions.",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "keywords": ["resume", "builder", "AI", "gemini", "pdf"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "puppeteer": "^24.19.0"
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Resume Builder</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smart Resume Builder</h1>
+            <p>Create a professional resume with AI-powered suggestions</p>
+        </header>
+
+        <div class="main-content">
+            <div class="form-section">
+                <form id="resumeForm">
+                    <!-- Personal Information -->
+                    <div class="form-group">
+                        <h2>Personal Information</h2>
+                        <div class="form-row">
+                            <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                            <input type="text" id="location" name="location" placeholder="City, State">
+                        </div>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="LinkedIn Profile (optional)">
+                        <input type="url" id="portfolio" name="portfolio" placeholder="Portfolio/Website (optional)">
+                    </div>
+
+                    <!-- Professional Summary -->
+                    <div class="form-group">
+                        <h2>Professional Summary</h2>
+                        <textarea id="summary" name="summary" placeholder="Brief professional summary highlighting your key skills and experience" rows="4"></textarea>
+                        <button type="button" class="ai-suggest-btn" onclick="getAISuggestion('summary')">✨ Get AI Suggestions</button>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="form-group">
+                        <h2>Work Experience</h2>
+                        <div id="experienceContainer">
+                            <div class="experience-item">
+                                <div class="form-row">
+                                    <input type="text" name="jobTitle[]" placeholder="Job Title" required>
+                                    <input type="text" name="company[]" placeholder="Company" required>
+                                </div>
+                                <div class="form-row">
+                                    <input type="text" name="startDate[]" placeholder="Start Date (e.g., Jan 2020)" required>
+                                    <input type="text" name="endDate[]" placeholder="End Date (or 'Present')" required>
+                                </div>
+                                <textarea name="jobDescription[]" placeholder="Describe your responsibilities and achievements" rows="3"></textarea>
+                                <button type="button" class="ai-suggest-btn" onclick="getAISuggestion('experience', this)">✨ Improve Description</button>
+                            </div>
+                        </div>
+                        <button type="button" id="addExperience" class="add-btn">+ Add Another Position</button>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="form-group">
+                        <h2>Education</h2>
+                        <div id="educationContainer">
+                            <div class="education-item">
+                                <div class="form-row">
+                                    <input type="text" name="degree[]" placeholder="Degree" required>
+                                    <input type="text" name="school[]" placeholder="School/University" required>
+                                </div>
+                                <div class="form-row">
+                                    <input type="text" name="graduationYear[]" placeholder="Graduation Year">
+                                    <input type="text" name="gpa[]" placeholder="GPA (optional)">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addEducation" class="add-btn">+ Add Another Degree</button>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="form-group">
+                        <h2>Skills</h2>
+                        <textarea id="skills" name="skills" placeholder="List your technical skills, programming languages, tools, etc. (comma-separated)" rows="3"></textarea>
+                        <button type="button" class="ai-suggest-btn" onclick="getAISuggestion('skills')">✨ Suggest Skills</button>
+                    </div>
+
+                    <!-- Projects -->
+                    <div class="form-group">
+                        <h2>Projects (Optional)</h2>
+                        <div id="projectsContainer">
+                            <div class="project-item">
+                                <input type="text" name="projectName[]" placeholder="Project Name">
+                                <textarea name="projectDescription[]" placeholder="Brief description of the project and technologies used" rows="2"></textarea>
+                                <input type="url" name="projectLink[]" placeholder="Project Link (optional)">
+                            </div>
+                        </div>
+                        <button type="button" id="addProject" class="add-btn">+ Add Another Project</button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="form-actions">
+                        <button type="button" id="previewBtn" class="btn btn-primary">Preview Resume</button>
+                        <button type="button" id="exportBtn" class="btn btn-secondary">Export as PDF</button>
+                        <button type="button" id="clearBtn" class="btn btn-danger">🗑️ Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resume Preview -->
+            <div class="preview-section" id="previewSection">
+                <div class="preview-header">
+                    <h2>Resume Preview</h2>
+                    <button id="closePreview" class="close-btn">×</button>
+                </div>
+                <div id="resumePreview" class="resume-template">
+                    <!-- Resume content will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Suggestions Modal -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AI Suggestions</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="aiSuggestions">
+                    <!-- AI suggestions will appear here -->
+                </div>
+                <div class="modal-actions">
+                    <button id="applySuggestion" class="btn btn-primary">Apply Suggestion</button>
+                    <button id="dismissSuggestion" class="btn btn-secondary">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
